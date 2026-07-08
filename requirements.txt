@@ -1,0 +1,11 @@
+langchain
+langchain-community
+langchain-google-genai
+langchain-chroma
+langchain-huggingface
+chromadb
+rank_bm25
+sentence-transformers
+ragas
+datasets
+python-dotenv
