@@ -36,4 +36,4 @@ Hand-labeled by Maanas (not synthetic) — ~20-30 queries over the essay corpus,
 - ground-truth answer (for RAGAS context_recall / answer correctness)
 
 ## Open Questions
-- None currently — chat CLI (`chat.py`) built, eval set still needs hand-labeling.
+- chat CLI (`chat.py`) built, eval set still needs hand-labeling.
