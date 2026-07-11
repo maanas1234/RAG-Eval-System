@@ -1,9 +1,8 @@
 """Answer synthesis: retrieved chunks + query -> Gemini answer."""
 
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_google_genai import ChatGoogleGenerativeAI
 
-from retrieve import build_multi_query_retriever
+from retrieve import build_llm, build_multi_query_retriever
 
 PROMPT = ChatPromptTemplate.from_template(
     "Answer the question using only the context below. "
@@ -17,8 +16,7 @@ def answer(question: str, retriever=None) -> dict:
     docs = retriever.invoke(question)
     context = "\n\n".join(doc.page_content for doc in docs)
 
-    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
-    chain = PROMPT | llm
+    chain = PROMPT | build_llm()
     response = chain.invoke({"context": context, "question": question})
 
     return {

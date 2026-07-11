@@ -1,15 +1,26 @@
 """Hybrid (BM25 + semantic) multi-query retriever."""
 
+import os
 import pickle
 
-from langchain.retrievers import EnsembleRetriever
-from langchain.retrievers.multi_query import MultiQueryRetriever
+from langchain_classic.retrievers import EnsembleRetriever
+from langchain_classic.retrievers.multi_query import MultiQueryRetriever
 from langchain_chroma import Chroma
 from langchain_community.retrievers import BM25Retriever
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_openai import ChatOpenAI
 
 from ingest import CHROMA_DIR, DOCS_PATH, EMBEDDING_MODEL
+
+OPENROUTER_MODEL = "openai/gpt-oss-20b"
+
+
+def build_llm() -> ChatOpenAI:
+    return ChatOpenAI(
+        model=OPENROUTER_MODEL,
+        base_url="https://openrouter.ai/api/v1",
+        api_key=os.environ["OPENROUTER_API_KEY"],
+    )
 
 
 def build_hybrid_retriever(k: int = 5) -> EnsembleRetriever:
@@ -27,8 +38,7 @@ def build_hybrid_retriever(k: int = 5) -> EnsembleRetriever:
 
 
 def build_multi_query_retriever(k: int = 5) -> MultiQueryRetriever:
-    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
-    return MultiQueryRetriever.from_llm(retriever=build_hybrid_retriever(k), llm=llm)
+    return MultiQueryRetriever.from_llm(retriever=build_hybrid_retriever(k), llm=build_llm())
 
 
 if __name__ == "__main__":

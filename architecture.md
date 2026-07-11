@@ -11,16 +11,17 @@ Excluded: `.obsidian`, `Tags`, `Templates`, `Things to explore`
 
 ## Stack
 - **Orchestration:** LangChain
-- **Vector store:** TBD (Chroma / FAISS)
-- **Sparse retrieval:** BM25 (rank_bm25 or LangChain's BM25Retriever)
-- **Dense retrieval:** embedding model TBD (OpenAI / sentence-transformers)
+- **Vector store:** Chroma (local, persisted to `chroma_db/`)
+- **Sparse retrieval:** BM25 (LangChain's BM25Retriever)
+- **Dense retrieval:** local embeddings (`sentence-transformers/all-MiniLM-L6-v2` via `langchain-huggingface`)
 - **Multi-query:** LangChain's MultiQueryRetriever (LLM generates query variants, results fused)
-- **Fusion:** ensemble/reciprocal rank fusion of BM25 + semantic results
+- **Fusion:** EnsembleRetriever (50/50 BM25 + semantic)
+- **LLM:** gpt-oss-20b via OpenRouter (`langchain-openai`, `ChatOpenAI` pointed at OpenRouter's base URL) — used for multi-query generation and answer synthesis
 - **Generation eval:** RAGAS (faithfulness, answer relevancy, context precision, context recall)
 - **Retrieval eval:** custom — Precision@k, Recall@k, MRR against hand-labeled query → relevant-chunk(s) mapping
 
 ## Pipeline
-1. **Ingest** — load `.md` files from included folders, strip frontmatter, chunk (size/overlap TBD).
+1. **Ingest** — load `.md` files from included folders, strip frontmatter, chunk per-note (whole note = one chunk).
 2. **Index** — build dense vector index + BM25 index over chunks.
 3. **Retrieve** — for a query: generate N query variants (multi-query), run each through BM25 + semantic retrievers, fuse and dedupe results into top-k.
 4. **Generate** — pass top-k chunks + original query to LLM for answer synthesis.
@@ -35,7 +36,4 @@ Hand-labeled by Maanas (not synthetic) — ~20-30 queries over the essay corpus,
 - ground-truth answer (for RAGAS context_recall / answer correctness)
 
 ## Open Questions
-- Vector store choice (local-first preference?)
-- Embedding model choice (cost vs. quality)
-- Chunking strategy (fixed-size vs. per-note vs. semantic chunking)
-- LLM for multi-query generation + answer synthesis
+- None currently — chat CLI (`chat.py`) built, eval set still needs hand-labeling.
