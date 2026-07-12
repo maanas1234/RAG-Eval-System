@@ -74,5 +74,25 @@
       "context_precision": 0.6904761904289682,
       "context_recall": 0.8333333333333333
     }
+  },
+  {
+    "timestamp": "2026-07-12T11:50:05.043739+00:00",
+    "config": {
+      "retrieval": "BM25 only",
+      "k": 5,
+      "llm": "openai/gpt-oss-20b"
+    },
+    "retrieval_metrics": {
+      "precision@k": 0.12727272727272732,
+      "recall@k": 0.5606060606060606,
+      "mrr": 0.5151515151515151
+    },
+    "ragas_metrics": {
+      "faithfulness": NaN,
+      "answer_relevancy": NaN,
+      "context_precision": 0.0,
+      "context_recall": NaN,
+      "note": "invalid - hit Groq 200k tokens/day free-tier cap mid-run, most judge calls failed"
+    }
   }
 ]

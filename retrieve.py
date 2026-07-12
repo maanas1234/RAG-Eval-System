@@ -15,14 +15,14 @@ from ingest import CHROMA_DIR, DOCS_PATH, EMBEDDING_MODEL
 
 load_dotenv(override=True)
 
-GROQ_MODEL = "openai/gpt-oss-20b"
+MODEL = "openai/gpt-oss-20b"
 
 
 def build_llm() -> ChatOpenAI:
     return ChatOpenAI(
-        model=GROQ_MODEL,
-        base_url="https://api.groq.com/openai/v1",
-        api_key=os.environ["GROQ_API_KEY"],
+        model=MODEL,
+        base_url="https://openrouter.ai/api/v1",
+        api_key=os.environ["OPENROUTER_API_KEY"],
         max_tokens=1024,
     )
 
