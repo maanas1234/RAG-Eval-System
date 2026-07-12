@@ -1,5 +1,6 @@
 """Eval harness: retrieval metrics (Precision@k, Recall@k, MRR) + RAGAS generation metrics."""
 
+import argparse
 import json
 from datetime import datetime, timezone
 
@@ -15,7 +16,6 @@ from retrieve import build_hybrid_retriever, build_llm, retrieve
 
 EVAL_SET_PATH = "eval_set.json"
 RESULTS_PATH = "results.json"
-RUN_CONFIG = {"retrieval": "hybrid (BM25 + semantic)", "k": 5, "llm": "openai/gpt-oss-20b"}
 
 
 def precision_at_k(retrieved: list[str], relevant: set[str]) -> float:
@@ -37,10 +37,10 @@ def reciprocal_rank(retrieved: list[str], relevant: set[str]) -> float:
     return 0.0
 
 
-def run_retrieval_eval(eval_set: list[dict], retriever) -> dict:
+def run_retrieval_eval(eval_set: list[dict], retriever, k: int) -> dict:
     precisions, recalls, rr = [], [], []
     for item in eval_set:
-        docs = retrieve(retriever, item["query"])
+        docs = retrieve(retriever, item["query"], k)
         retrieved_sources = [d.metadata["source"] for d in docs]
         relevant = set(item["relevant_sources"])
 
@@ -56,10 +56,10 @@ def run_retrieval_eval(eval_set: list[dict], retriever) -> dict:
     }
 
 
-def run_ragas_eval(eval_set: list[dict]) -> dict:
+def run_ragas_eval(eval_set: list[dict], retriever, k: int) -> dict:
     rows = []
     for item in eval_set:
-        result = answer(item["query"])
+        result = answer(item["query"], retriever=retriever, k=k)
         rows.append(
             {
                 "question": item["query"],
@@ -79,7 +79,7 @@ def run_ragas_eval(eval_set: list[dict]) -> dict:
     return scores
 
 
-def save_run(retrieval_metrics: dict, ragas_metrics: dict) -> None:
+def save_run(config: dict, retrieval_metrics: dict, ragas_metrics: dict) -> None:
     try:
         with open(RESULTS_PATH, encoding="utf-8") as f:
             runs = json.load(f)
@@ -89,7 +89,7 @@ def save_run(retrieval_metrics: dict, ragas_metrics: dict) -> None:
     runs.append(
         {
             "timestamp": datetime.now(timezone.utc).isoformat(),
-            "config": RUN_CONFIG,
+            "config": config,
             "retrieval_metrics": retrieval_metrics,
             "ragas_metrics": ragas_metrics._repr_dict,
         }
@@ -100,20 +100,26 @@ def save_run(retrieval_metrics: dict, ragas_metrics: dict) -> None:
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--k", type=int, default=5)
+    args = parser.parse_args()
+    k = args.k
+
     with open(EVAL_SET_PATH, encoding="utf-8") as f:
         eval_set = json.load(f)
 
-    retriever = build_hybrid_retriever()
+    retriever = build_hybrid_retriever(k)
 
     print("Retrieval metrics:")
-    retrieval_metrics = run_retrieval_eval(eval_set, retriever)
+    retrieval_metrics = run_retrieval_eval(eval_set, retriever, k)
     print(retrieval_metrics)
 
     print("\nRAGAS metrics:")
-    ragas_metrics = run_ragas_eval(eval_set)
+    ragas_metrics = run_ragas_eval(eval_set, retriever, k)
     print(ragas_metrics)
 
-    save_run(retrieval_metrics, ragas_metrics)
+    config = {"retrieval": "hybrid (BM25 + semantic)", "k": k, "llm": "openai/gpt-oss-20b"}
+    save_run(config, retrieval_metrics, ragas_metrics)
 
 
 if __name__ == "__main__":

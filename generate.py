@@ -11,9 +11,9 @@ PROMPT = ChatPromptTemplate.from_template(
 )
 
 
-def answer(question: str, retriever=None) -> dict:
-    retriever = retriever or build_hybrid_retriever()
-    docs = retrieve(retriever, question)
+def answer(question: str, retriever=None, k: int = 5) -> dict:
+    retriever = retriever or build_hybrid_retriever(k)
+    docs = retrieve(retriever, question, k)
     context = "\n\n".join(doc.page_content for doc in docs)
 
     chain = PROMPT | build_llm()
