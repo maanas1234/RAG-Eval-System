@@ -12,10 +12,16 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 from generate import answer
 from ingest import EMBEDDING_MODEL
-from retrieve import build_hybrid_retriever, build_llm, retrieve
+from retrieve import build_bm25_retriever, build_hybrid_retriever, build_llm, build_semantic_retriever, retrieve
 
 EVAL_SET_PATH = "eval_set.json"
 RESULTS_PATH = "results.json"
+
+RETRIEVER_BUILDERS = {
+    "hybrid": (build_hybrid_retriever, "hybrid (BM25 + semantic)"),
+    "bm25": (build_bm25_retriever, "BM25 only"),
+    "semantic": (build_semantic_retriever, "semantic only"),
+}
 
 
 def precision_at_k(retrieved: list[str], relevant: set[str]) -> float:
@@ -102,13 +108,15 @@ def save_run(config: dict, retrieval_metrics: dict, ragas_metrics: dict) -> None
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--k", type=int, default=5)
+    parser.add_argument("--retrieval", choices=RETRIEVER_BUILDERS.keys(), default="hybrid")
     args = parser.parse_args()
     k = args.k
 
     with open(EVAL_SET_PATH, encoding="utf-8") as f:
         eval_set = json.load(f)
 
-    retriever = build_hybrid_retriever(k)
+    build_retriever, retrieval_label = RETRIEVER_BUILDERS[args.retrieval]
+    retriever = build_retriever(k)
 
     print("Retrieval metrics:")
     retrieval_metrics = run_retrieval_eval(eval_set, retriever, k)
@@ -118,7 +126,7 @@ def main():
     ragas_metrics = run_ragas_eval(eval_set, retriever, k)
     print(ragas_metrics)
 
-    config = {"retrieval": "hybrid (BM25 + semantic)", "k": k, "llm": "openai/gpt-oss-20b"}
+    config = {"retrieval": retrieval_label, "k": k, "llm": "openai/gpt-oss-20b"}
     save_run(config, retrieval_metrics, ragas_metrics)
 
 

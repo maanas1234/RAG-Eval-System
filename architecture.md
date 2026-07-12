@@ -15,7 +15,7 @@ Excluded: `.obsidian`, `Tags`, `Templates`, `Things to explore`
 - **Sparse retrieval:** BM25 (LangChain's BM25Retriever)
 - **Dense retrieval:** local embeddings (`sentence-transformers/all-MiniLM-L6-v2` via `langchain-huggingface`)
 - **Fusion:** EnsembleRetriever (50/50 BM25 + semantic), truncated back to top-k after fusion
-- **LLM:** gpt-oss-20b via OpenRouter (`langchain-openai`, `ChatOpenAI` pointed at OpenRouter's base URL) — used for answer synthesis and as the RAGAS judge model
+- **LLM:** gpt-oss-20b via Groq (`langchain-openai`, `ChatOpenAI` pointed at Groq's base URL) — used for answer synthesis and as the RAGAS judge model
 - **Generation eval:** RAGAS (faithfulness, answer relevancy, context precision, context recall)
 - **Retrieval eval:** custom — Precision@k, Recall@k, MRR against hand-labeled query → relevant-chunk(s) mapping
 
