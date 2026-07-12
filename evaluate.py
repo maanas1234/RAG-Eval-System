@@ -1,15 +1,21 @@
 """Eval harness: retrieval metrics (Precision@k, Recall@k, MRR) + RAGAS generation metrics."""
 
 import json
+from datetime import datetime, timezone
 
 from datasets import Dataset
 from ragas import evaluate as ragas_evaluate
 from ragas.metrics import answer_relevancy, context_precision, context_recall, faithfulness
 
+from langchain_huggingface import HuggingFaceEmbeddings
+
 from generate import answer
-from retrieve import build_multi_query_retriever
+from ingest import EMBEDDING_MODEL
+from retrieve import build_hybrid_retriever, build_llm, retrieve
 
 EVAL_SET_PATH = "eval_set.json"
+RESULTS_PATH = "results.json"
+RUN_CONFIG = {"retrieval": "hybrid (BM25 + semantic)", "k": 5, "llm": "openai/gpt-oss-20b"}
 
 
 def precision_at_k(retrieved: list[str], relevant: set[str]) -> float:
@@ -34,7 +40,7 @@ def reciprocal_rank(retrieved: list[str], relevant: set[str]) -> float:
 def run_retrieval_eval(eval_set: list[dict], retriever) -> dict:
     precisions, recalls, rr = [], [], []
     for item in eval_set:
-        docs = retriever.invoke(item["query"])
+        docs = retrieve(retriever, item["query"])
         retrieved_sources = [d.metadata["source"] for d in docs]
         relevant = set(item["relevant_sources"])
 
@@ -67,21 +73,47 @@ def run_ragas_eval(eval_set: list[dict]) -> dict:
     scores = ragas_evaluate(
         dataset,
         metrics=[faithfulness, answer_relevancy, context_precision, context_recall],
+        llm=build_llm(),
+        embeddings=HuggingFaceEmbeddings(model_name=EMBEDDING_MODEL),
     )
     return scores
+
+
+def save_run(retrieval_metrics: dict, ragas_metrics: dict) -> None:
+    try:
+        with open(RESULTS_PATH, encoding="utf-8") as f:
+            runs = json.load(f)
+    except FileNotFoundError:
+        runs = []
+
+    runs.append(
+        {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "config": RUN_CONFIG,
+            "retrieval_metrics": retrieval_metrics,
+            "ragas_metrics": ragas_metrics._repr_dict,
+        }
+    )
+    with open(RESULTS_PATH, "w", encoding="utf-8") as f:
+        json.dump(runs, f, indent=2)
+    print(f"\nSaved run to {RESULTS_PATH}")
 
 
 def main():
     with open(EVAL_SET_PATH, encoding="utf-8") as f:
         eval_set = json.load(f)
 
-    retriever = build_multi_query_retriever()
+    retriever = build_hybrid_retriever()
 
     print("Retrieval metrics:")
-    print(run_retrieval_eval(eval_set, retriever))
+    retrieval_metrics = run_retrieval_eval(eval_set, retriever)
+    print(retrieval_metrics)
 
     print("\nRAGAS metrics:")
-    print(run_ragas_eval(eval_set))
+    ragas_metrics = run_ragas_eval(eval_set)
+    print(ragas_metrics)
+
+    save_run(retrieval_metrics, ragas_metrics)
 
 
 if __name__ == "__main__":

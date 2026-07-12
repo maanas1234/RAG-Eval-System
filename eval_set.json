@@ -1,7 +1,182 @@
 [
   {
-    "query": "",
+    "query": "What's my view on how we should treat blue-collar workers?",
+    "relevant_sources": ["Atomic Notes\\Everyone you meet is fighting a battle you know nothing about..md"],
+    "ground_truth": "Everyone is fighting their own battle and no one is inherently superior to anyone else. I've seen family members disrespect blue-collar workers and disagree with it -- I try to talk to everyone with respect, drawing on Harari's idea of developing a deep appreciation for others' suffering."
+  },
+  {
+    "query": "How do I think about things that are outside my control?",
+    "relevant_sources": ["Atomic Notes\\I had learned to let fate take its course.md"],
+    "ground_truth": "I believe in leaving what's outside your control to fate, inspired by Viktor Frankl not intervening in his own fate at Auschwitz and the Bhagavad Gita's teaching to do your duty without attachment to the outcome. You should still do the work, but obsessing over results doesn't help -- often the things you don't get turn out fine anyway."
+  },
+  {
+    "query": "What did I learn about indecision?",
+    "relevant_sources": ["Atomic Notes\\More is lost with indecision than wrong decision.md"],
+    "ground_truth": "More is lost through indecision than through making a wrong decision. I often get stuck between choices, even small ones like whether to go to class, usually out of fear or uncertainty about the outcome."
+  },
+  {
+    "query": "Do I believe in free will?",
+    "relevant_sources": ["Knowledge Base\\Videos & Articles\\Do we have free will.md"],
+    "ground_truth": "I don't think pure/100% free will exists -- our choices are shaped by genetics, upbringing, environment, and past conditioning. I land on a form of soft determinism: there's an illusion of free will, and while we may have free will (wanting something), we often lack free action (being able to actually do it) because of real-world consequences and constraints."
+  },
+  {
+    "query": "When do I think it's okay to lie?",
+    "relevant_sources": ["Knowledge Base\\Videos & Articles\\Is lying bad.md"],
+    "ground_truth": "Lying manipulates someone's free will by feeding them false information they'd use to make a decision. But I argue it can be justified when human life is at stake -- e.g. lying to a murderer about a stranger's location. I conclude people mostly lie in self-interest, and that human life is generally valued above an individual's free will."
+  },
+  {
+    "query": "What's the butterfly effect and how does it apply to my own life?",
+    "relevant_sources": ["Knowledge Base\\Videos & Articles\\The Butterfly effect.md"],
+    "ground_truth": "The butterfly effect is a small event in a non-linear, low-buffer system amplifying into a huge consequence -- like the assassination of Archduke Franz Ferdinand triggering WWI. I connect it to how my relationship with my girlfriend started from a random wifi connection coinciding with a phone call, and loosely tie it to spiritual ideas about alignment."
+  },
+  {
+    "query": "What is the Sirianni Method and do I think it's worth doing?",
+    "relevant_sources": ["Knowledge Base\\Sirianni Notes\\The Sirianni Method.md"],
+    "ground_truth": "A memory technique using index cards for topics studied, each with a description, a personal-connection section, and a section describing it as a painting, aimed at building a photographic-style memory. I think it could be effective but feels like friction, and planned to trial it for 2 months."
+  },
+  {
+    "query": "Why was Bhagat Singh an atheist?",
+    "relevant_sources": ["Content Plans\\Scripts\\Short form scripts\\Bhagat Singh was an Atheist.md"],
+    "ground_truth": "Bhagat Singh questioned believers with two arguments: if God is omnipresent, omniscient, and created the world, why make a world full of grief and misery? And if prayer is a law God is bound by, God isn't truly omnipotent -- so given how many people die under God's watch, what separates God from a mass killer like Genghis Khan?"
+  },
+  {
+    "query": "What's the Almanac of Naval Ravikant about?",
+    "relevant_sources": ["Content Plans\\Scripts\\Short form scripts\\Almanac of Naval Ravikant.md"],
+    "ground_truth": "A compilation of Naval Ravikant's teachings on starting a business, creating wealth, happiness, self-love, and philosophy of life. I frame it as more valuable than formal schooling for someone hungry for knowledge across topics."
+  },
+  {
+    "query": "Why am I scared of being judged while recording videos in my room?",
+    "relevant_sources": ["Self\\Scared of being judged.md"],
+    "ground_truth": "I'm afraid of what my roommates/others will think of me, even though as a kid I recorded videos in public without any fear. I conclude the fear is about caring what people around me think, and plan to counter it by consciously entering a 'state of self' where only the task at hand matters, reminding myself that most people are too busy with their own lives to care, and that people who mock others are usually projecting their own insecurities."
+  },
+  {
+    "query": "What's my advice for someone who wants to start reading but can't?",
+    "relevant_sources": ["Content Plans\\Scripts\\Short form scripts\\Reading Books.md"],
+    "ground_truth": "Start with something easy like Diary of a Wimpy Kid rather than jumping straight into heavy philosophy books. People quit reading because they start with the wrong book. First fall in love with reading, then read what you love."
+  },
+  {
+    "query": "What's the Stoic technique I use for calming down?",
+    "relevant_sources": ["Content Plans\\Scripts\\Short form scripts\\Stoic Calmness.md"],
+    "ground_truth": "A Stoic breathing/awareness exercise from Marcus Aurelius's philosophy: close your eyes and, with each breath, become aware of every part of your body -- arms, legs, chest, abdomen. Real calmness comes from within, and this awareness practice reveals it."
+  },
+  {
+    "query": "How do the ideas of fate and duty from the Gita show up across my notes?",
+    "relevant_sources": [
+      "Atomic Notes\\I had learned to let fate take its course.md",
+      "Knowledge Base\\Videos & Articles\\Stop living in fear.md"
+    ],
+    "ground_truth": "In both notes I reference the Gita's teaching of focusing on your duty without attachment to the outcome ('not entitled to the fruit of your actions'). In the fate note I apply it to letting go of what's outside my control (via Frankl's story and my own JEE prep). In the other note I call it 'the real dharma' and admit I still slip into comparing myself to others like Shreyas instead of staying focused on my own work."
+  },
+  {
+    "query": "How does my thinking on free will connect to my thinking on lying?",
+    "relevant_sources": [
+      "Knowledge Base\\Videos & Articles\\Do we have free will.md",
+      "Knowledge Base\\Videos & Articles\\Is lying bad.md"
+    ],
+    "ground_truth": "In the free-will note I argue humans don't have pure free will because our choices are conditioned by genetics, upbringing, and past experience. In the lying note I build on this, arguing lying manipulates someone's free will by feeding them false information they'd use to make what they think is a free, rational decision."
+  },
+  {
+    "query": "What do I say about objective, subjective, and intersubjective reality?",
+    "relevant_sources": [
+      "Content Plans\\Scripts\\Short form scripts\\Intersubjective Reality.md",
+      "Content Plans\\Scripts\\Short form scripts\\Objective, subjective, intersubjective.md"
+    ],
+    "ground_truth": "Objective reality is fact-based (e.g. 'Maggi contains maida'), subjective reality is personal opinion (e.g. 'Maggi is bad'), and intersubjective reality is something a large group of people collectively believes, like a religion. I use this framework to argue that people shouldn't be attacked for stating a subjective opinion, since that violates their free will and is closer to dictatorship than democracy."
+  },
+  {
+    "query": "What's my strategy for picking stocks to invest in?",
     "relevant_sources": [],
-    "ground_truth": ""
+    "ground_truth": "Not covered in my notes -- there is no essay or entry about stock-picking or investing strategy."
+  },
+  {
+    "query": "What programming languages and frameworks do I use for my coding projects?",
+    "relevant_sources": [],
+    "ground_truth": "Not covered in my notes -- the vault is personal essays/journaling and philosophy content, not a coding log."
+  },
+  {
+    "query": "What's my take on Animal Farm and its parallels to real politics?",
+    "relevant_sources": ["Knowledge Base\\Books\\Animal Farm\\Animal Farm.md"],
+    "ground_truth": "I read it as a story of propaganda and unsupervised power: Napoleon frames Snowball as a traitor and manipulates the uneducated animals with a simple story, much like Congress and BJP sell narratives to voters. Squealer's gaslighting mirrors modern political spin. The ending, where the pigs become indistinguishable from the humans they overthrew, shows power corrupts without supervision, and that citizens need to stay rational rather than get swept up in a story."
+  },
+  {
+    "query": "What did I think of the story 'Before I Could Speak'?",
+    "relevant_sources": ["Knowledge Base\\Books\\Before I Could Speak\\Part-1.md"],
+    "ground_truth": "I liked the non-linear structure, starting from Priya leaving and unfolding backward, and read it as a story about responsibility vs. passion for the main character Aravind. His arc is really about self-realization -- he learns Priya just wanted him present, not money or status. I critiqued the emotional description as sometimes shallow/AI-sounding and wanted more depth on side characters, rating it around 7/10 on plot and 7.5/10 on character development."
+  },
+  {
+    "query": "What's my character sketch of Kafka Tamura in Kafka on the Shore?",
+    "relevant_sources": ["Knowledge Base\\Books\\Kafka on the shore\\Untitled.md"],
+    "ground_truth": "Kafka Tamura is private, has few friends, and spends most of his time reading in the library -- mature well beyond his age, more like a 40-year-old mentally. I connect his focus in class to a broader idea that full effort in the moment reduces later effort needed. I also reflect on fate and coincidence through his meeting with Sakura, and on 'the boy named crow' as possibly an alter ego or hype-man figure, tied to Japanese Crow Tengu folklore and a fan theory linking it to Nakata's lost shadow."
+  },
+  {
+    "query": "What did I take from the 'cats are powerless' passage in Kafka on the Shore?",
+    "relevant_sources": ["Knowledge Base\\Books\\Kafka on the shore\\Untitled 1.md"],
+    "ground_truth": "Mimi's line about cats being weak, injury-prone creatures made me reflect on how people romanticize 'wishing to be a cat' based on lavish Instagram cats, when the reality of being a stray is closer to being a homeless person. I also reflected on Nakata's inner darkness as a metaphor for the hidden parts of ourselves we should still accept as our own, even if we don't show them to others."
+  },
+  {
+    "query": "What does 'a point of no return' mean to me in Kafka on the Shore?",
+    "relevant_sources": ["Knowledge Base\\Books\\Kafka on the shore\\Untitled 2.md"],
+    "ground_truth": "I read Oshima's line two ways: first, as a life-altering moment after which you can't go back (falling in love, an irreversible act); second, more spiritually, as the idea that every single moment is technically a point of no return since you can never relive it. This ties to Miss Saeki, who I say essentially 'died' -- lost her will to live -- after her boyfriend's death, similar to how Frankl described camp prisoners who lost their will to live."
+  },
+  {
+    "query": "What did I reflect on about identity and appreciating what you have, from Kafka on the Shore?",
+    "relevant_sources": ["Knowledge Base\\Books\\Kafka on the shore\\Untitled 3.md"],
+    "ground_truth": "Reflecting on Kafka's 'what am I really?' question, I describe myself as a soul searching for something -- maybe truth -- through reading, traveling, and writing, without fully knowing why. I also connect Nakata's lack of awareness of desire/loneliness to the idea that consciousness itself is the source of suffering, and end on the idea that we should appreciate things now rather than only valuing them after losing them."
+  },
+  {
+    "query": "What does Frankl say about humor and finding meaning in suffering?",
+    "relevant_sources": ["Knowledge Base\\Books\\Man's Search for Meaning\\Part 02.md"],
+    "ground_truth": "Frankl describes developing a sense of humor as a survival trick learned in the camps, a way to distract from unbearable reality. He argues suffering must have meaning for life to be complete, and contrasts prisoners who lost their hold on life by dwelling in the past with those who treated hardship as a chance to grow spiritually. He also notes camp deaths spiked between Christmas and New Year when a hoped-for liberation didn't come."
+  },
+  {
+    "query": "How does Frankl's account of love and suffering play out across Man's Search for Meaning?",
+    "relevant_sources": [
+      "Knowledge Base\\Books\\Man's Search for Meaning\\Part 01.md",
+      "Knowledge Base\\Books\\Man's Search for Meaning\\Part 02.md"
+    ],
+    "ground_truth": "In Part 1, love -- imagining talking to his wife while marching -- gives Frankl the will to keep going, which I take as proof of love's power over a person. In Part 2, he extends this to suffering broadly: suffering must have meaning for life to be complete, humor is another survival tool, and prisoners who lost hope (of seeing loved ones, of liberation) declined and died faster than those who kept a will to live."
+  },
+  {
+    "query": "What do my Bhagavad Gita notes say about the world/samsara as illusion?",
+    "relevant_sources": ["Knowledge Base\\Books\\The BhagvatGita\\Introduction.md"],
+    "ground_truth": "The world (samsara) is described as fallen, enslaved, and alienating -- chasing its 'prizes' (the fruit of karma) causes suffering. I compare this to how the world's illusions have captured human attention long before social media did, framing samsara as an early version of the same trap."
+  },
+  {
+    "query": "What's my take on Krishna, Arjuna, and duty (dharma) in the Bhagavad Gita?",
+    "relevant_sources": ["Knowledge Base\\Books\\The BhagvatGita\\Chapter -1.md"],
+    "ground_truth": "I read the world as dharmakshetra, a battleground for inner moral struggle between desire and duty. I agree with dharma as duty/responsibility but push back if it means religion specifically. I question why loyalty to duty should override individual opinion, drawing a parallel to Bhagat Singh's essay on nation over individual freedom, and I struggle with why Krishna -- as the guiding atman in everyone -- wouldn't prevent tragedies like the Holocaust if he's truly present in all of us."
+  },
+  {
+    "query": "How do my two Bhagavad Gita notes connect on illusion, duty, and suffering?",
+    "relevant_sources": [
+      "Knowledge Base\\Books\\The BhagvatGita\\Introduction.md",
+      "Knowledge Base\\Books\\The BhagvatGita\\Chapter -1.md"
+    ],
+    "ground_truth": "The Introduction frames the material world (samsara) as an illusion/enslavement that causes suffering when we chase its 'prizes.' Chapter 1 extends this into the dharmakshetra idea -- life as an internal battleground where duty (dharma) has to win out over desire, pride, and possessions. Together they frame the world's pull as the obstacle standing between a person and their duty or spiritual freedom."
+  },
+  {
+    "query": "What did I think about freedom and authority in Kafka's The Trial?",
+    "relevant_sources": ["Knowledge Base\\Books\\The Trial\\The Trial - 001.md"],
+    "ground_truth": "I reflected on the absurdity of Joseph K. being arrested without ever being told why, and questioned whether the 'free' policemen who arrest him are actually free themselves, tying it back to my notes on free will. I noted how Joseph's self-respect is lost the instant the police enter his room uninvited, and highlighted the line 'I only fear danger where I want to fear it' as capturing his calm, composed reaction to an absurd situation."
+  },
+  {
+    "query": "What do I think will happen with AI doctors and AI drivers?",
+    "relevant_sources": ["Knowledge Base\\Books\\21 Lessons for 21st Century\\AI and the future(7-11-25).md"],
+    "ground_truth": "I think AI will eventually outperform GPs at diagnosing common, pattern-based diseases, and that AI drivers will reduce accidents from drunk/distracted driving, though it raises questions like who an autonomous car should sacrifice in an unavoidable-accident scenario, and mass unemployment for professional drivers. I think AI advancement shouldn't be stopped to protect jobs, but government should handle the resulting unemployment."
+  },
+  {
+    "query": "What's my opinion on the school curriculum and what education should focus on?",
+    "relevant_sources": ["Knowledge Base\\Books\\21 Lessons for 21st Century\\Education(21-11-25).md"],
+    "ground_truth": "I largely agree with Harari that schools should emphasize the 4 C's -- critical thinking, communication, collaboration, creativity -- over narrow predetermined technical skills, since average graduates are weak in critical thinking and communication. But I push back that subjects like math and physics still matter because they build stronger neural pathways and problem-solving ability, even if not directly job-relevant."
+  },
+  {
+    "query": "What's my view on oligarchy and how it plays out in Indian politics?",
+    "relevant_sources": ["Knowledge Base\\Books\\21 Lessons for 21st Century\\Oligarchy (7-11-25).md"],
+    "ground_truth": "I think India is a prime example of an oligarchy that keeps manufacturing crises (like religious disputes) to distract from real issues -- unemployment, pollution, student suicides -- that never get proper national attention. I argue those who force religious agendas on others out of prejudice should be held accountable, and that those running the country use such distractions to hide the real state of things."
+  },
+  {
+    "query": "What do I believe about God, religion, and science?",
+    "relevant_sources": ["Knowledge Base\\Books\\21 Lessons for 21st Century\\God, faith, universe, god again(15-11-25).md"],
+    "ground_truth": "I think 'god' and religion were created by humans to provide hope and a sense of being watched over, though I do believe some unexplained supernatural energy or power may exist beyond current understanding. I argue there's no problem believing in a god, but claiming your god is the only or superior one is close-minded. I contrast this with science, which people across cultures can agree on (like E=mc^2), unlike religion, and note that priests/pandits lose credibility when they claim expertise that overlaps with science rather than sticking to interpretation and offering hope."
   }
 ]

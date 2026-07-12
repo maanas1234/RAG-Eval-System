@@ -1,12 +1,12 @@
-"""Hybrid (BM25 + semantic) multi-query retriever."""
+"""Hybrid (BM25 + semantic) retriever."""
 
 import os
 import pickle
 
 from langchain_classic.retrievers import EnsembleRetriever
-from langchain_classic.retrievers.multi_query import MultiQueryRetriever
 from langchain_chroma import Chroma
 from langchain_community.retrievers import BM25Retriever
+from langchain_core.documents import Document
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import ChatOpenAI
 
@@ -37,12 +37,24 @@ def build_hybrid_retriever(k: int = 5) -> EnsembleRetriever:
     return EnsembleRetriever(retrievers=[bm25, semantic], weights=[0.5, 0.5])
 
 
-def build_multi_query_retriever(k: int = 5) -> MultiQueryRetriever:
-    return MultiQueryRetriever.from_llm(retriever=build_hybrid_retriever(k), llm=build_llm())
+def retrieve(retriever, query: str, k: int = 5) -> list[Document]:
+    """Run the retriever and truncate the fused result back to the top-k notes.
+
+    EnsembleRetriever fuses BM25 + semantic results but doesn't cap the total
+    (two k=5 sub-retrievers can return up to 10 after fusion), so this slices
+    back to k. Also dedupes by source path as a safety net.
+    """
+    seen = set()
+    unique_docs = []
+    for doc in retriever.invoke(query):
+        source = doc.metadata["source"]
+        if source not in seen:
+            seen.add(source)
+            unique_docs.append(doc)
+    return unique_docs[:k]
 
 
 if __name__ == "__main__":
-    retriever = build_multi_query_retriever()
-    results = retriever.invoke("What do I think about deep work?")
-    for doc in results:
+    retriever = build_hybrid_retriever()
+    for doc in retrieve(retriever, "What do I think about deep work?"):
         print(doc.metadata["source"])

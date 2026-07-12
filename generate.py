@@ -1,8 +1,8 @@
-"""Answer synthesis: retrieved chunks + query -> Gemini answer."""
+"""Answer synthesis: retrieved chunks + query -> LLM answer."""
 
 from langchain_core.prompts import ChatPromptTemplate
 
-from retrieve import build_llm, build_multi_query_retriever
+from retrieve import build_hybrid_retriever, build_llm, retrieve
 
 PROMPT = ChatPromptTemplate.from_template(
     "Answer the question using only the context below. "
@@ -12,8 +12,8 @@ PROMPT = ChatPromptTemplate.from_template(
 
 
 def answer(question: str, retriever=None) -> dict:
-    retriever = retriever or build_multi_query_retriever()
-    docs = retriever.invoke(question)
+    retriever = retriever or build_hybrid_retriever()
+    docs = retrieve(retriever, question)
     context = "\n\n".join(doc.page_content for doc in docs)
 
     chain = PROMPT | build_llm()
